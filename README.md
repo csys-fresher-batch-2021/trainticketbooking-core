@@ -1,4 +1,4 @@
-# Train Ticket Booing App
+# Train Ticket Booking App
 
 # Project Features
 
