@@ -1,7 +1,6 @@
-
+# Train Ticket Booing App
 
 # Project Features
-
 
 # Feature 1- viewing train details:-
 
