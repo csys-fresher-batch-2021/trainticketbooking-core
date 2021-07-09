@@ -2,7 +2,7 @@
 
 # Project Features
 
-# Feature 1- viewing train details:-
+# Feature 1- Viewing train details:-
 
 create table train_details (tr_id number NOT NULL,train_number int NOT NULL,train_name varchar2(50) NOT NULL,
 				                     train_source varchar2(40) NOT NULL,train_destination varchar2(40) NOT NULL,
@@ -12,7 +12,6 @@ create table train_details (tr_id number NOT NULL,train_number int NOT NULL,trai
                                     constraint tr_id_pk primary key(tr_id)
 			                      );
 					      
-select * from train_details;
 
 # ADD Query:-
 
@@ -34,13 +33,14 @@ to_timestamp('16-jul-2021 07:10:00','DD-Mon-YYYY HH24:MI:SS'),'FirstClass',1050)
 insert into train_details values (6,24586,'VELANEXPRESS','MADUARI','SELAM',to_timestamp('23-Jul-2021 07:00:00','DD-Mon-YYYY HH24:MI:SS'),
 to_timestamp('23-jul-2021 12:10:00','DD-Mon-YYYY HH24:MI:SS'),'SecondClass',830);
 
+# Displaying Train Details:
 select * from train_details;
 
 drop table train_details;
 
 DELETE FROM train_details WHERE train_name='RAYAPURAMEXPRESS';
 
-# Feature 2-passenger details:-
+# Feature 2-Passenger Details:-
 
 create table passenger_details
 (
@@ -56,7 +56,7 @@ constraint train_id_fk foreign key(tr_id) references train_details(tr_id));
 
 select * from  passenger_details;
 
-# ADD Query:-
+# Add Query:-
 
 insert into passenger_details
 values(1111,1,'swetha','female',9937808765,1000549873);
@@ -72,7 +72,7 @@ values(4444,4,'nivetha','female',8765437809,9876234768);
 
 drop table passenger_details;
 
-# Feature- 3 booking details
+# Feature- 3 Booking Details
 
 create table booking_details
 (
@@ -86,6 +86,7 @@ birth_type varchar2(20) not null,
 constraint passanger_id_fk foreign key(passanger_id) references passenger_details(passanger_id), 
 constraint tr_id_fk foreign key(tr_id) references train_details(tr_id));
 
+# Displaying Booking Details:-
 select * from booking_details;
 
 # ADD Query:-
@@ -98,23 +99,23 @@ insert into booking_details values(3,3333,100003,'26/july/2021','S-1','AC','ac_s
 
 drop table booking_details;
 
-# Feature -4 viewing all train names:-
+# Feature -4 Viewing All Train Names:-
 
 select train_name from train_details;
 
-# Feature -5 displaying the female passengers with their train name:-
+# Feature -5 Displaying The Female Passengers With Their Train Name:-
 
 select p.passanger_name,t.train_name from passenger_details p ,train_details t where p.tr_id=t.tr_id and p.gender='female';
 
-# Feature -6 giving name of the train we can able to see where the train starts and ends and finally displaying it in ascending order
+# Feature -6 Giving Name Of The Train We Can Able To See Where The Train Starts And Ends Displaying In Ascending Order
 
 select train_name,train_source,train_destination from train_details order by train_name;
 
-# Feature -7 count of trains moving from chennai
+# Feature -7 Count of Trains Moving From Chennai
 
 select count(train_source) from train_details where train_source='CHENNAI';
 
-# Feature -8 altering the booking_table column and adding the column to know the status of payment_status
+# Feature -8 Altering the Booking_table Column and Adding the Column to know the Status of Payment_status
 
 alter table booking_details add payment_status varchar2(100);
 
