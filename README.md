@@ -11,6 +11,7 @@ create table train_details (tr_id number NOT NULL,train_number int NOT NULL,trai
                                  unique(train_name),check(fare>0),
                                     constraint tr_id_pk primary key(tr_id)
 			                      );
+					      
 select * from train_details;
 
 # ADD Query:-
