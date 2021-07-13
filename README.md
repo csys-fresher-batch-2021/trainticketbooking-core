@@ -1,37 +1,41 @@
-# Train Ticket Booking Apps
+# Train Ticket Booking App
 
 # Project Features
 
-# Feature 1- Viewing train details:-
+# Feature 1- Viewing Train Details:-
 
-create table train_details (tr_id number NOT NULL,train_number int NOT NULL,train_name varchar2(50) NOT NULL,
-				                     train_source varchar2(40) NOT NULL,train_destination varchar2(40) NOT NULL,
-			                        source_time timestamp NOT NULL,destination_time timestamp NOT NULL,
-			                         class_type varchar2(40) NOT NULL,fare int NOT NULL,
-                                 unique(train_name),check(fare>0),
-                                    constraint tr_id_pk primary key(tr_id)
-			                      );
-					      
+CREATE SEQUENCE tr_id
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
 
-# ADD Query:-
+CREATE SEQUENCE train_number
+MINVALUE 1
+START WITH 21651
+INCREMENT BY 1;
 
-insert into train_details values (1,21653,'TEJASEXPRESS','TRICHY','MADUARAI',to_timestamp('10-jun-2021 07:10:34','DD-Mon-YYYY HH24:MI:SS'),
-to_timestamp('11-jun-2021 23:13:24','DD-Mon-YYYY HH24:MI:SS'),'FirstClass',1240);
 
-insert into train_details values (2,21654,'VAIGAIEXPRESS','MADURAI','CHENNAI',to_timestamp('11-jun-2021 08:10:00','DD-Mon-YYYY HH24:MI:SS'),
-to_timestamp('12-jun-2021 13:10:00','DD-Mon-YYYY HH24:MI:SS'),'SecondClass',1000);
+create table train_details (
+tr_id number NOT NULL,train_number int NOT NULL,train_name varchar2(50) NOT NULL,
+train_source varchar2(40) NOT NULL,train_destination varchar2(40) NOT NULL,
+source_time varchar2(50) NOT NULL,destination_time varchar2(50) NOT NULL,
+station_one varchar2(50) NOT NULL,station_two varchar2(50),station_three varchar2(50),
+fare int NOT NULL,available_Days varchar2(50),available_seats number NOT NULL,
+unique(train_number),check(fare>0),constraint tr_id_pk primary key(tr_id));
 
-insert into train_details values (3,21655,'TRICHYEXPRESS','CHENNAI','TRICHY',to_timestamp('12-jun-2021 10:10:00','DD-Mon-YYYY HH24:MI:SS'),
-to_timestamp('13-jun-2021 16:10:00','DD-Mon-YYYY HH24:MI:SS'),'THRIDClass',750);
+select * from train_details;					      
 
-insert into train_details values (4,21656,'PACHAIYAPPAEXPRESS','COMIBATORE','TRIRUNELVELI',to_timestamp('14-jun-2021 23:10:00','DD-Mon-YYYY HH24:MI:SS'),
-to_timestamp('15-jun-2021 05:10:00','DD-Mon-YYYY HH24:MI:SS'),'FirstClass',1150);
+select station_one, station_two,station_three FROM train_details WHERE tr_id=2;
 
-insert into train_details values (5,24567,'RAYAPURAMEXPRESS','TRICHY','CHENNAI',to_timestamp('15-Jul-2021 23:00:00','DD-Mon-YYYY HH24:MI:SS'),
-to_timestamp('16-jul-2021 07:10:00','DD-Mon-YYYY HH24:MI:SS'),'FirstClass',1050);
+select station_one, station_two,station_three FROM train_details WHERE train_source='TRICHY' and train_destination='MADUARAI';
 
-insert into train_details values (6,24586,'VELANEXPRESS','MADUARI','SELAM',to_timestamp('23-Jul-2021 07:00:00','DD-Mon-YYYY HH24:MI:SS'),
-to_timestamp('23-jul-2021 12:10:00','DD-Mon-YYYY HH24:MI:SS'),'SecondClass',830);
+# Add Query:-
+
+insert into train_details values (tr_id.nextval,train_number.nextval,'TEJASEXPRESS','TRICHY','MADUARAI','10:00','17:00','SRIRANGAM','PONMALAI','LALGUDI',1240,'DAILY',100);
+
+insert into train_details values (tr_id.nextval,train_number.nextval,'VAIGAIEXPRESS','MADURAI','CHENNAI','05:00','11:30','TRICHY','PERAMBALUR','VILUPURAM',1000,'MONDAY,TUESDAY',150);
+
+insert into train_details values (tr_id.nextval,train_number.nextval,'TRICHYEXPRESS','CHENNAI','TRICHY','08:00','15:00','VILUPURAM','PERAMBALUR','PONMALAI',750,'WEDNEDAY,SUNDAY',175);
 
 # Displaying Train Details:
 select * from train_details;
@@ -42,60 +46,69 @@ DELETE FROM train_details WHERE train_name='RAYAPURAMEXPRESS';
 
 # Feature 2-Passenger Details:-
 
+CREATE SEQUENCE passenger_id
+MINVALUE 1
+START WITH 1001
+INCREMENT BY 1;
+
 create table passenger_details
 (
- passanger_id number ,
- tr_id number not null,
- passanger_name varchar2(100) not null,
+ passenger_id number ,
+ passenger_name varchar2(100) not null,
  gender varchar2(10) not null,
- contact_number number not null,
- aadhar_number number not null unique,
+ mobile_number number not null,
+ passenger_password varchar2(50),
 constraint  gender_ch check(gender in('male','female','others')),
-constraint passanger_id_pk primary key(passanger_id),
-constraint train_id_fk foreign key(tr_id) references train_details(tr_id));
+constraint passenger_id_pk primary key(passenger_id),unique(mobile_number));
 
 select * from  passenger_details;
 
 # Add Query:-
 
 insert into passenger_details
-values(1111,1,'swetha','female',9937808765,1000549873);
+values(passenger_id.nextval,'swetha','female',9937808765,'swetha@123');
 
 insert into passenger_details
-values(2222,2,'mohamad','male',9876543210,8100054973);
+values(passenger_id.nextval,'mohamed','male',9435627890,'mohamed@123');
 
 insert into passenger_details
-values(3333,3,'sakil','male',8765432109,6553476298);
-
-insert into passenger_details
-values(4444,4,'nivetha','female',8765437809,9876234768);
+values(passenger_id.nextval,'sikkandar','male',9698612143,'sikkandar@123');
 
 drop table passenger_details;
 
 # Feature- 3 Booking Details
 
-create table booking_details
-(
-tr_id number,
-passanger_id number,
-pnr_no number primary key,
-booking_date date,
-compartment_no varchar2(10)not null,
-coach_type varchar2(20) not null,
-birth_type varchar2(20) not null,
-constraint passanger_id_fk foreign key(passanger_id) references passenger_details(passanger_id), 
-constraint tr_id_fk foreign key(tr_id) references train_details(tr_id));
+CREATE SEQUENCE booking_id
+MINVALUE 1
+START WITH 101
+INCREMENT BY 1;
+
+create table booking_details(
+booking_id  number,
+passenger_id int NOT NULL,
+tr_id int NOT NULL,
+pnr_no int NOT NULL,
+journey_date date NOT NULL,
+booking_date timestamp NOT NULL,
+no_of_tickets int NOT NULL,
+passenger_name varchar2(50),
+total_price int NOT NULL,
+status varchar2(20),
+UNIQUE(pnr_no),
+CONSTRAINT tr_id_fk FOREIGN KEY (tr_id)REFERENCES train_details (tr_id),
+CONSTRAINT passenger_id_fk FOREIGN KEY (passenger_id)REFERENCES passenger_details (passenger_id),
+check(no_of_tickets>0),check(total_price>0));
 
 # Displaying Booking Details:-
 select * from booking_details;
 
-# ADD Query:-
+# Add Query:-
 
-insert into booking_details values(1,1111,100001,'30/july/2021','S-3','NON_AC','sitting');
+insert into booking_details values(booking_id.nextval,1001,1,5861,'30/july/2021',to_timestamp('10-jun-2021 07:10:34','DD-Mon-YYYY HH24:MI:SS')
+,2,'swetha,mohamed',2480,'BOOKED');
 
-insert into booking_details values(2,2222,100002,'22/july/2021','S-5','NON_AC','sleeper');
-
-insert into booking_details values(3,3333,100003,'26/july/2021','S-1','AC','ac_sleeper');
+insert into booking_details values(booking_id.nextval,1002,2,5862,'28/july/2021',to_timestamp('20-jul-2021 17:10:34','DD-Mon-YYYY HH24:MI:SS')
+,1,'sakil',1000,'UNBOOKED');
 
 drop table booking_details;
 
