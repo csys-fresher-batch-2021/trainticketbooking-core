@@ -1,5 +1,12 @@
 package in.swetha.exception;
+public class DBException  extends Exception {
+	
+	private static final long serialVersionUID = 1L;
 
-public class DBException {
+	public DBException(String message) {
+		super(message);
+		
+	}
 
-}
+
+} 

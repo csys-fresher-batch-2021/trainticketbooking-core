@@ -13,7 +13,7 @@ public class PassengerDetailsValidator {
 		if (passengerId & passengerName && passengerGender && passengerMobileNo && passengerPassWord) {
 			return true;
 		} else {
-			//return false;
+			// return false;
 			throw new Exception("Invalid Details");
 		}
 	}
@@ -32,8 +32,9 @@ public class PassengerDetailsValidator {
 
 	public static boolean nameValidator(String passengerName) {
 		boolean isValid = false;
-		String regex = "[a-zA-Z]+\\.?";
-		if (passengerName.matches(regex) && passengerName.trim().length() > 2) {
+		// passengerName="swetha";
+		// String regex = "[a-zA-Z]+\\.?";(passengerName.matches(regex)
+		if (passengerName.trim().length() > 2) {
 			isValid = true;
 			System.out.println("Valid Name");
 		} else {

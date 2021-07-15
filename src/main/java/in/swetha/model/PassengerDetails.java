@@ -18,6 +18,10 @@ public class PassengerDetails {
 	public PassengerDetails() {
 		super();
 	}
+	
+	public PassengerDetails(String string, String string2) {
+		
+	}
 	public Integer getPassengerId() {
 		return passengerId;
 	}
