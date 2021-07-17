@@ -1,17 +1,13 @@
 package in.swetha.model;
 
-import in.swetha.service.TrainDetailsService;
+import in.swetha.util.Logger;
 
 public class TrainDetailsTest {
 
-		public static void main(String Arg[]) throws Exception {
-		try {
-			TrainDetails trainDetails= new TrainDetails(7,28657,"MumbaiExpress","trichy","madurai","10:00","13:00","srirangam","ponmalai","lalkudi",240,"daily",100);
-			TrainDetailsService.trainDetails(trainDetails);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception(e.getMessage());
-		}
-		}
+	public static void main(String Arg[]) throws Exception {
+		Logger logger = new Logger();
+		TrainDetails trainDetails = new TrainDetails(4, 28654, "VAIKAIEXPRESS", "trichy", "madurai", "10:00", "13:00",
+				"srirangam", "ponmalai", "lalkudi", 240, "daily", 100);
+		logger.debug(trainDetails);
 	}
-
+}

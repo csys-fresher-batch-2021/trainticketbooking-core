@@ -3,16 +3,19 @@ package in.swetha.service;
 import java.util.List;
 import in.swetha.dao.PassengerDetailsDAO;
 import in.swetha.model.PassengerDetails;
+import in.swetha.util.Logger;
 import in.swetha.validator.PassengerDetailsValidator;
 
 public class PassengerDetailsService {
+	static Logger logger = new Logger();
+
 	public static void passengerDetails(PassengerDetails passengerDetails) throws Exception {
 
 		boolean isValid = PassengerDetailsValidator.validate(passengerDetails);
 		if (isValid) {
 			PassengerDetailsDAO.save(passengerDetails);
 		} else {
-			System.out.println("Invalid Details");
+			logger.debug("Invalid Details");
 
 		}
 
@@ -24,7 +27,7 @@ public class PassengerDetailsService {
 		for (PassengerDetails passengerDetails : passengerDetail) {
 			if (passengerDetails.getPassangerName().equals(passengerName)
 					&& passengerDetails.getPassword().equals(passengerPassword)) {
-				System.out.println("Login Sucess");
+				logger.debug("Login Sucess");
 				isValidUser = true;
 				break;
 			}
@@ -36,7 +39,7 @@ public class PassengerDetailsService {
 
 	public static boolean updatePassword(Long mobileNo, String passWord) throws Exception {
 		boolean isValid = false;
-		
+
 		if (PassengerDetailsValidator.numberValidator(mobileNo)
 				&& PassengerDetailsValidator.passwordValidator(passWord)) {
 			PassengerDetailsDAO.updatePassengerDetails(mobileNo, passWord);

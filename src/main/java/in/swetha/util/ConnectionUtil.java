@@ -6,13 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import in.swetha.exception.DBException;
+
 public class ConnectionUtil {
 
 	private ConnectionUtil() {
 
 	}
 
-	public static Connection getConnection() throws Exception {
+	public static Connection getConnection() throws DBException {
 		String driverClassName = "oracle.jdbc.driver.OracleDriver";
 		String url = "jdbc:oracle:thin:@192.168.0.20:1521:DBEBS12";
 		String username = "apps";
@@ -27,10 +29,10 @@ public class ConnectionUtil {
 			connection = DriverManager.getConnection(url, username, password);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			throw new Exception("Unable to load the db driver class");
+			throw new DBException("Unable to load the db driver class");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new Exception("Unable to connect database");
+			throw new DBException("Unable to connect database");
 		}
 
 		return connection;

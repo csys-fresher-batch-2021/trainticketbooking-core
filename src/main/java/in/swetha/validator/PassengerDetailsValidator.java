@@ -1,8 +1,10 @@
 package in.swetha.validator;
 
 import in.swetha.model.PassengerDetails;
+import in.swetha.util.Logger;
 
 public class PassengerDetailsValidator {
+	static Logger logger = new Logger();
 
 	public static boolean validate(PassengerDetails passengerDetails) throws Exception {
 		boolean passengerId = PassengerDetailsValidator.idValidator(passengerDetails.getPassengerId());
@@ -18,27 +20,26 @@ public class PassengerDetailsValidator {
 		}
 	}
 
-	public static boolean idValidator(Integer id) throws Exception {
+	public static boolean idValidator(Integer id) {
 		boolean isValid = false;
 		if (id > 0) {
 			isValid = true;
-			System.out.println("Valid id");
+			logger.debug("Valid id");
 		} else {
-			//System.out.println("Invalid id");
-			 throw new Exception("Invalid Id");
+			logger.debug("Invalid Id");
 		}
 		return isValid;
 	}
 
 	public static boolean nameValidator(String passengerName) {
 		boolean isValid = false;
-		// passengerName="swetha";
-		// String regex = "[a-zA-Z]+\\.?";(passengerName.matches(regex)
-		if (passengerName.trim().length() > 2) {
+
+		String regex = "[a-zA-Z]+\\.?";
+		if ((passengerName.matches(regex) && passengerName.trim().length() > 2)) {
 			isValid = true;
-			System.out.println("Valid Name");
+			logger.debug("Valid Name");
 		} else {
-			System.out.println("Invalid Name");
+			logger.debug("Invalid Name");
 
 		}
 		return isValid;
@@ -49,9 +50,9 @@ public class PassengerDetailsValidator {
 		boolean isValid = false;
 		if (gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female") || gender.equalsIgnoreCase("others")) {
 			isValid = true;
-			System.out.println("Valid Gender Details");
+			logger.debug("Valid Gender Details");
 		} else {
-			System.out.println("Invalid Gender Details");
+			logger.debug("Invalid Gender Details");
 		}
 
 		return isValid;
@@ -63,9 +64,9 @@ public class PassengerDetailsValidator {
 		String number = String.valueOf(mobileNo);
 		if (number.length() == 10) {
 			isValid = true;
-			System.out.println("Valid MobileNumber");
+			logger.debug("Valid MobileNumber");
 		} else {
-			System.out.println("Invalid MobileNumber");
+			logger.debug("Invalid MobileNumber");
 		}
 		return isValid;
 	}
@@ -74,9 +75,9 @@ public class PassengerDetailsValidator {
 		boolean isValid = false;
 		if (passWord != null && passWord.trim().length() >= 8) {
 			isValid = true;
-			System.out.println("Valid PassWord");
+			logger.debug("Valid PassWord");
 		} else {
-			System.out.println("Invalid PassWord");
+			logger.debug("Invalid PassWord");
 		}
 		return isValid;
 

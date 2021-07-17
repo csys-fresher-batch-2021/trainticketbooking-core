@@ -6,12 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import in.swetha.exception.DBException;
 import in.swetha.model.PassengerDetails;
 import in.swetha.util.ConnectionUtil;
 
 public class PassengerDetailsDAO {
 
-	public static void save(PassengerDetails passengerDetails) throws Exception {
+	public static void save(PassengerDetails passengerDetails) throws DBException {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
@@ -26,13 +28,13 @@ public class PassengerDetailsDAO {
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new Exception("Unable to insert passengerdetails");
+			throw new DBException("Unable to insert passengerdetails");
 		} finally {
 			ConnectionUtil.close(connection, pst);
 		}
 	}
 
-	public static List<PassengerDetails> getPassengerDetails() throws Exception {
+	public static List<PassengerDetails> getPassengerDetails() throws DBException {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		ResultSet result = null;
@@ -58,14 +60,14 @@ public class PassengerDetailsDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new Exception("Unable to fetch User -" + e.getMessage());
+			throw new DBException("Unable to fetch User -" + e.getMessage());
 		} finally {
 			ConnectionUtil.close(connection, pst);
 		}
 		return passengerDetails;
 	}
 
-	public static boolean updatePassengerDetails(Long mobilNumber, String passWord) throws Exception {
+	public static boolean updatePassengerDetails(Long mobilNumber, String passWord) throws DBException {
 		boolean isUpdated = false;
 		Connection connection = null;
 		PreparedStatement pst = null;
@@ -81,7 +83,7 @@ public class PassengerDetailsDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new Exception("Unable to Update UserPassword -" + e.getMessage());
+			throw new DBException("Unable to Update UserPassword -" + e.getMessage());
 		} finally {
 			ConnectionUtil.close(connection, pst);
 		}
