@@ -5,14 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import in.swetha.model.PassengerDetails;
 import in.swetha.util.ConnectionUtil;
 
 public class PassengerDetailsDAO {
-	Map<String, String> userDetails = new HashMap<>();
 
 	public static void save(PassengerDetails passengerDetails) throws Exception {
 		Connection connection = null;
@@ -59,14 +56,36 @@ public class PassengerDetailsDAO {
 				passengerDetail.setPassword(password);
 				passengerDetails.add(passengerDetail);
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new Exception("Unable to fetch User");
+			throw new Exception("Unable to fetch User -" + e.getMessage());
 		} finally {
 			ConnectionUtil.close(connection, pst);
 		}
 		return passengerDetails;
-			}
-	
-	
+	}
+
+	public static boolean updatePassengerDetails(Long mobilNumber, String passWord) throws Exception {
+		boolean isUpdated = false;
+		Connection connection = null;
+		PreparedStatement pst = null;
+		String sql = "UPDATE passenger_details set passenger_password=? where mobile_number=?";
+
+		try {
+			connection = ConnectionUtil.getConnection();
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, passWord);
+			pst.setLong(2, mobilNumber);
+			pst.executeUpdate();
+			isUpdated = true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new Exception("Unable to Update UserPassword -" + e.getMessage());
+		} finally {
+			ConnectionUtil.close(connection, pst);
+		}
+		return isUpdated;
+	}
+
 }

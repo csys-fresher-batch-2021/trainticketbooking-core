@@ -1,11 +1,12 @@
 package in.swetha.service;
 
+import in.swetha.dao.BookingDetailsDAO;
 import in.swetha.model.BookingDetails;
 import in.swetha.validator.BookingDetailsValidator;
 
 public class BookingDetailsService {
 
-		public static void bookingDetails(BookingDetails bookingDetails) {
+		public static void bookingDetails(BookingDetails bookingDetails) throws Exception {
 			boolean bookingId = BookingDetailsValidator.isBookingIdValid(bookingDetails.getBookingId());
 			boolean passengerId = BookingDetailsValidator.isPassengerIdValid(bookingDetails.getPassengerId());
 			boolean trainId = BookingDetailsValidator.isTrainIdValid(bookingDetails.getTrainId());
@@ -21,7 +22,5 @@ public class BookingDetailsService {
 				System.out.println("Details not correctly");
 			}
 		}
-
-	}
-
-
+	
+}

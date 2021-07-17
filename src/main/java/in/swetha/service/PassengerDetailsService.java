@@ -7,37 +7,41 @@ import in.swetha.validator.PassengerDetailsValidator;
 
 public class PassengerDetailsService {
 	public static void passengerDetails(PassengerDetails passengerDetails) throws Exception {
-		
+
 		boolean isValid = PassengerDetailsValidator.validate(passengerDetails);
-		if(isValid)
-		{
+		if (isValid) {
 			PassengerDetailsDAO.save(passengerDetails);
-		}
-		else {
+		} else {
 			System.out.println("Invalid Details");
-			
+
 		}
-		
+
 	}
-	
+
 	public static void checkUser(String passengerName, String passengerPassword) throws Exception {
 		boolean isValidUser = false;
 		List<PassengerDetails> passengerDetail = PassengerDetailsDAO.getPassengerDetails();
 		for (PassengerDetails passengerDetails : passengerDetail) {
-			if (passengerDetails.getPassangerName().equals(passengerName) && passengerDetails.getPassword().equals(passengerPassword))
-			{
+			if (passengerDetails.getPassangerName().equals(passengerName)
+					&& passengerDetails.getPassword().equals(passengerPassword)) {
 				System.out.println("Login Sucess");
 				isValidUser = true;
 				break;
 			}
 		}
-		if (!isValidUser ) {
+		if (!isValidUser) {
 			throw new Exception("Name or PassWord Is Wrong");
 		}
 	}
-	
+
+	public static boolean updatePassword(Long mobileNo, String passWord) throws Exception {
+		boolean isValid = false;
+		
+		if (PassengerDetailsValidator.numberValidator(mobileNo)
+				&& PassengerDetailsValidator.passwordValidator(passWord)) {
+			PassengerDetailsDAO.updatePassengerDetails(mobileNo, passWord);
+			isValid = true;
+		}
+		return isValid;
+	}
 }
-
-	
-	
-

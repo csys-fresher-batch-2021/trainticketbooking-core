@@ -18,14 +18,14 @@ public class PassengerDetailsValidator {
 		}
 	}
 
-	public static boolean idValidator(Integer id) {
+	public static boolean idValidator(Integer id) throws Exception {
 		boolean isValid = false;
 		if (id > 0) {
 			isValid = true;
 			System.out.println("Valid id");
 		} else {
-			System.out.println("Invalid id");
-			// throw new Exception("Invalid Id");
+			//System.out.println("Invalid id");
+			 throw new Exception("Invalid Id");
 		}
 		return isValid;
 	}
