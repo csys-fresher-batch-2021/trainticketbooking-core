@@ -4,7 +4,7 @@
 
 # Feature 1- Viewing Train Details:-
 
-CREATE SEQUENCE tr_id
+CREATE SEQUENCE train_id
 MINVALUE 1
 START WITH 1
 INCREMENT BY 1;
@@ -16,12 +16,12 @@ INCREMENT BY 1;
 
 
 create table train_details (
-tr_id number NOT NULL,train_number int NOT NULL,train_name varchar2(50) NOT NULL,
+train_id number NOT NULL,train_number int NOT NULL,train_name varchar2(50) NOT NULL,
 train_source varchar2(40) NOT NULL,train_destination varchar2(40) NOT NULL,
 source_time varchar2(50) NOT NULL,destination_time varchar2(50) NOT NULL,
 station_one varchar2(50) NOT NULL,station_two varchar2(50),station_three varchar2(50),
 fare int NOT NULL,available_Days varchar2(50),available_seats number NOT NULL,
-unique(train_number),check(fare>0),constraint tr_id_pk primary key(tr_id));
+unique(train_number),check(fare>0));
 
 select * from train_details;					      
 
