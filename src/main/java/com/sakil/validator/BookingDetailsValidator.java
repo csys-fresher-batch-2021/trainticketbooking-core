@@ -1,58 +1,61 @@
 package com.sakil.validator;
 
+import com.sakil.connection.Logger;
+
 public class BookingDetailsValidator {
+	static Logger logger = new Logger();
+
 	public static boolean isBookingIdValid(Integer bookingId) {
-			boolean valid = false;
-			if (bookingId>0) {
-				System.out.println("Valid bookingid");
-				valid = true;
-			} else {
-				System.out.println("Invalid bookingid");
-			}
-			return valid;
-		
+		boolean valid = false;
+		if (bookingId > 0) {
+			logger.debug("Valid bookingid");
+			valid = true;
+		} else {
+			logger.debug("Invalid bookingid");
+		}
+		return valid;
 	}
 
 	public static boolean isPassengerIdValid(Integer passengerId) {
 		boolean valid = false;
-		if (passengerId>0) {
-			System.out.println("Valid passengerid");
+		if (passengerId > 0) {
+			logger.debug("Valid passengerid");
 			valid = true;
 		} else {
-			System.out.println("Invalid passengerid");
+			logger.debug("Invalid passengerid");
 		}
 		return valid;
 	}
 
 	public static boolean isTrainIdValid(Integer trainId) {
 		boolean valid = false;
-		if (trainId>0) {
-			System.out.println("Valid trainid");
+		if (trainId > 0) {
+			logger.debug("Valid trainid");
 			valid = true;
 		} else {
-			System.out.println("Invalid trainid");
+			logger.debug("Invalid trainid");
 		}
 		return valid;
 	}
 
 	public static boolean isPnrNoValid(Integer pnrNo) {
 		boolean valid = false;
-		if (pnrNo>0) {
-			System.out.println("Valid pnrno");
+		if (pnrNo > 0) {
+			logger.debug("Valid pnrno");
 			valid = true;
 		} else {
-			System.out.println("Invalid pnrno");
+			logger.debug("Invalid pnrno");
 		}
 		return valid;
 	}
 
 	public static boolean isNoOfTicketValid(Integer noOfTickets) {
 		boolean valid = false;
-		if (noOfTickets>0) {
-			System.out.println("Valid noofticket");
+		if (noOfTickets > 0) {
+			logger.debug("Valid noofticket");
 			valid = true;
 		} else {
-			System.out.println("Invalid noofticket");
+			logger.debug("Invalid noofticket");
 		}
 		return valid;
 	}
@@ -60,22 +63,22 @@ public class BookingDetailsValidator {
 	public static boolean isPassengerNameValid(String passengerName) {
 		boolean valid = false;
 		String regex = "[a-zA-Z]+\\.?";
-		if (passengerName.matches(regex)) {
-			System.out.println("Valid passengername");
+		if (passengerName.matches(regex) && passengerName.trim().length() > 2) {
+			logger.debug("Valid passengername");
 			valid = true;
 		} else {
-			System.out.println("Invalid passengername");
+			logger.debug("Invalid passengername");
 		}
 		return valid;
 	}
 
 	public static boolean isTotalPriceValid(Float totalPrice) {
 		boolean valid = false;
-		if (totalPrice>0) {
-			System.out.println("Valid totalprice");
+		if (totalPrice > 0) {
+			logger.debug("Valid totalprice");
 			valid = true;
 		} else {
-			System.out.println("Invalid totalprice");
+			logger.debug("Invalid totalprice");
 		}
 		return valid;
 	}
@@ -83,10 +86,10 @@ public class BookingDetailsValidator {
 	public static boolean isStatusValid(String status) {
 		boolean valid = false;
 		if (status.equalsIgnoreCase("booked") || status.equalsIgnoreCase("unbooked")) {
-			System.out.println("Valid status");
+			logger.debug("Valid status");
 			valid = true;
 		} else {
-			System.out.println("Invalid status");
+			logger.debug("Invalid status");
 		}
 		return valid;
 	}

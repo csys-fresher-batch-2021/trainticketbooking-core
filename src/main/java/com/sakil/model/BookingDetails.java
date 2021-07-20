@@ -7,6 +7,9 @@ public class BookingDetails {
 	private Integer passengerId;
 	private Integer trainId;
 	private Integer pnrNo;
+	private String trainName;
+	private String trainFrom;
+	private String trainTo;
 	private LocalDate journeyLocalDate;
 	private LocalDate bookingLocalDate;
 	private Integer noOfTickets;
@@ -14,10 +17,6 @@ public class BookingDetails {
 	private Float totalPrice;
 	private String status;
 	private String date;
-
-	public BookingDetails() {
-		super();
-	}
 
 	public Integer getBookingId() {
 		return bookingId;
@@ -49,6 +48,30 @@ public class BookingDetails {
 
 	public void setPnrNo(Integer pnrNo) {
 		this.pnrNo = pnrNo;
+	}
+
+	public String getTrainName() {
+		return trainName;
+	}
+
+	public void setTrainName(String trainName) {
+		this.trainName = trainName;
+	}
+
+	public String getTrainFrom() {
+		return trainFrom;
+	}
+
+	public void setTrainFrom(String trainFrom) {
+		this.trainFrom = trainFrom;
+	}
+
+	public String getTrainTo() {
+		return trainTo;
+	}
+
+	public void setTrainTo(String trainTo) {
+		this.trainTo = trainTo;
 	}
 
 	public LocalDate getJourneyLocalDate() {
@@ -99,13 +122,30 @@ public class BookingDetails {
 		this.status = status;
 	}
 
-	public BookingDetails(Integer bookingId, Integer passengerId, Integer trId, Integer pnrNo, LocalDate journeyLocalDate,
-			LocalDate bookingLocalDate, Integer noOfTickets, String passengerName, Float totalPrice, String status) {
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public BookingDetails() {
+		super();
+
+	}
+
+	public BookingDetails(Integer bookingId, Integer passengerId, Integer trainId, Integer pnrNo, String trainName,
+			String trainFrom, String trainTo, LocalDate journeyLocalDate, LocalDate bookingLocalDate,
+			Integer noOfTickets, String passengerName, Float totalPrice, String status) {
 		super();
 		this.bookingId = bookingId;
 		this.passengerId = passengerId;
-		this.trainId = trId;
+		this.trainId = trainId;
 		this.pnrNo = pnrNo;
+		this.trainName = trainName;
+		this.trainFrom = trainFrom;
+		this.trainTo = trainTo;
 		this.journeyLocalDate = journeyLocalDate;
 		this.bookingLocalDate = bookingLocalDate;
 		this.noOfTickets = noOfTickets;
@@ -116,14 +156,11 @@ public class BookingDetails {
 
 	@Override
 	public String toString() {
-		return "BookingDetails [bookingId=" + bookingId + ", passengerId=" + passengerId + ", trId=" + trainId
-				+ ", pnrNo=" + pnrNo + ", journeyLocalDate=" + journeyLocalDate + ", bookingLocalDate=" + bookingLocalDate
-				+ ", noOfTickets=" + noOfTickets + ", passengerName=" + passengerName + ", totalPrice=" + totalPrice
-				+ ", status=" + status + "]";
-	}
-
-	public String getDate() {
-		return date;
+		return "BookingDetails [bookingId=" + bookingId + ", passengerId=" + passengerId + ", trainId=" + trainId
+				+ ", pnrNo=" + pnrNo + ", trainName=" + trainName + ", trainFrom=" + trainFrom + ", trainTo=" + trainTo
+				+ ", journeyLocalDate=" + journeyLocalDate + ", bookingLocalDate=" + bookingLocalDate + ", noOfTickets="
+				+ noOfTickets + ", passengerName=" + passengerName + ", totalPrice=" + totalPrice + ", status=" + status
+				+ "]";
 	}
 
 }

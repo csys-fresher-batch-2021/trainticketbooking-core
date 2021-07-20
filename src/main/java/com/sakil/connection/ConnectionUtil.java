@@ -33,8 +33,6 @@ public class ConnectionUtil {
 			throw new Exception("Unable to connect database");
 		}
 
-		System.out.println(connection);
-
 		return connection;
 	}
 
@@ -67,4 +65,3 @@ public class ConnectionUtil {
 		}
 	}
 }
-
