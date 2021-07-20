@@ -132,10 +132,10 @@ select count(train_source) from train_details where train_source='CHENNAI';
 
 alter table booking_details add payment_status varchar2(100);
 
-update  booking_details set payment_status='paid' where tr_id=1;
+update  booking_details set payment_status='paid' where train_id=1;
 
-update  booking_details set payment_status='not_paid' where tr_id=2;
+update  booking_details set payment_status='not_paid' where train_id=2;
 
-update booking_details set payment_status='paid' where tr_id=3;
+update booking_details set payment_status='paid' where train_id=3;
 
 select * from booking_details;
