@@ -51,14 +51,14 @@ MINVALUE 1
 START WITH 1001
 INCREMENT BY 1;
 
-create table passenger_details
-(
- passenger_id number ,
- passenger_name varchar2(100) not null,
- gender varchar2(10) not null,
- mobile_number number not null,
- passenger_password varchar2(50),
-constraint  gender_ch check(gender in('male','female','others')),
+
+create table passenger_details (
+passenger_id number,
+passenger_name varchar2(100) not null,
+gender varchar2(10) not null, 
+mobile_number number not null, 
+passenger_password varchar2(50),
+constraint gender_ch check(gender in('male','female','others')), 
 constraint passenger_id_pk primary key(passenger_id),unique(mobile_number));
 
 select * from  passenger_details;
